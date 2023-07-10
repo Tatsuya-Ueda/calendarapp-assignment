@@ -1,6 +1,11 @@
 const daysOfWeek = ["日", "月", "火", "水", "木", "金", "土"]; // characters of days of week
 const today = new Date();
 
+window.onload = () => {
+  const x = updateCalendar(today.getFullYear(), today.getMonth());
+  document.querySelector(".calendar-grid").innerHTML = x;
+};
+
 // 「前月」ボタンを押したときの動作
 const prevMonth = () => {
   updateCalendar();
