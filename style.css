@@ -1,0 +1,90 @@
+/* 
+フォントサイズメモ
+・表題はmin(2vw, 24px)，標準文字サイズは16px
+
+*/
+
+/* @media screen and (max-width: 768px) {
+}
+@media screen and (min-width: 769px) {
+}
+@media screen and (min-width: 769px) and (max-width: 1199px) {
+} */
+
+/* 画面いっぱいに配置 */
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+
+/* html要素いっぱいに配置， */
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  /* 子要素を上下左右中央揃え */
+  display: flex; /* 子要素をFlexible Boxとして扱う */
+  justify-content: center; /*左右中央揃え*/
+  align-items: center; /*上下中央揃え*/
+}
+
+/* アプリ本体 */
+.wrapper-main {
+  width: 90%;
+  height: 90%;
+  outline: dashed 3px gray;
+  padding: 5px; /* borderより内側に余白をとる */
+  /* 子要素を上下左右中央揃え */
+  display: flex; /* 子要素をFlexible Boxとして扱う */
+  flex-flow: column; /* Flexible Boxを縦に並べる */
+  justify-content: center; /*左右中央揃え*/
+  align-items: center; /*上下中央揃え*/
+}
+
+.wrapper-main h1 {
+  text-align: center;
+  /* margin: 0 auto; */
+  margin: 0 20px 0 20px;
+  font-size: min(2vw, 24px);
+}
+
+.calendar-grid {
+  width: 90%;
+  height: 90%;
+  display: grid;
+  grid-template-rows: 0.4fr 1fr 1fr 1fr 1fr 1fr 1fr; /* 行 */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; /* 列 */
+  /* 枠線 */
+  border: solid gray;
+  border-width: 1px 1px 1px 1px;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+  /* 枠線 */
+  border: solid gray;
+  border-width: 0 1px 1px 0;
+}
+
+.topbar {
+  display: flex; /* 子要素をFlexible Boxとして扱う */
+  justify-content: center; /*左右中央揃え*/
+  align-items: center; /*上下中央揃え*/
+}
+
+/* .row {
+  border: 1px solid gray;
+  display: flex;
+}
+.row div {
+  border: 1px solid gray;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+} */
