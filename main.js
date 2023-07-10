@@ -13,7 +13,7 @@ const prevMonth = () => {
 
 // 「翌月」ボタンを押したときの動作
 const nextMonth = () => {
-  x = updateCalendar(2023, 0);
+  const x = updateCalendar(2023, 0);
   document.querySelector(".calendar-grid").innerHTML = x;
 };
 
