@@ -1,24 +1,41 @@
-const daysOfWeekChar = ["日", "月", "火", "水", "木", "金", "土"]; // characters of days of week
+const daysOfWeek = ["日", "月", "火", "水", "木", "金", "土"]; // characters of days of week
+const today = new Date();
 
+// 「前月」ボタンを押したときの動作
 const prevMonth = () => {
   updateCalendar();
 };
 
+// 「翌月」ボタンを押したときの動作
 const nextMonth = () => {
-  //   alert();
-
-  updateCalendar();
+  x = updateCalendar(2023, 0);
+  document.querySelector(".calendar-grid").innerHTML = x;
 };
 
-const updateCalendar = () => {
-  let x = "";
-  // 曜日のセルを描画
-  for (let i = 0; i < daysOfWeekChar.length; i++) {
-    x += '<div class="cell">' + daysOfWeekChar[i] + "</div>";
+// 特定の月をカレンダーに表示するためのHTMLの内容(文字列)を作成する
+const updateCalendar = (year, monthIndex) => {
+  const startDayOfWeek = new Date(year, monthIndex, 1).getDay();
+  const endDateThisMonth = new Date(year, monthIndex + 1, 0).getDate();
+  const endDateLastMonth = new Date(year, monthIndex, 0).getDate();
+  // const row = Math.ceil((startDayOfWeek + endDate) / week.length);
+  let cells = [];
+
+  // 一番目の行(月, 火, 水...の行) = 7セル分
+  for (let i = 0; i < daysOfWeek.length; i++) {
+    cells.push(`<div class="cell-header">${daysOfWeek[i]}</div>`);
   }
-  // 日付のセルを描画
-  for (let i = 0; i < 6 * daysOfWeekChar.length; i++) {
-    x += '<div class="cell">(日付)</div>';
+  // 今月にはみ出ている先月の日付のセル = 開始曜日に依存して，0～6セル分
+  for (let i = endDateLastMonth - startDayOfWeek; i < endDateLastMonth; i++) {
+    cells.push(`<div class="cell-disabled">${i + 1}</div>`);
   }
-  document.querySelector(".calendar-grid").innerHTML = x;
+  // 今月の日付のセル
+  for (let i = 0; i < endDateThisMonth; i++) {
+    cells.push(`<div class="cell">${i + 1}</div>`);
+  }
+  // 合計49セルになるまで，来月の日付で埋める
+  for (let i = 0; cells.length < 7 * 7; i++) {
+    cells.push(`<div class="cell-disabled">${i + 1}</div>`);
+  }
+
+  return cells.join("");
 };
