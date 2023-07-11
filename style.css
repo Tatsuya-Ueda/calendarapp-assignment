@@ -97,6 +97,32 @@ body {
   border-width: 0 1px 1px 0;
 }
 
+.cell-holiday-red {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: min(2vw, 16px);
+  color: red;
+  /* 枠線 */
+  border: solid gray;
+  border-width: 0 1px 1px 0;
+}
+
+.cell-holiday-blue {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: min(2vw, 16px);
+  color: blue;
+  /* 枠線 */
+  border: solid gray;
+  border-width: 0 1px 1px 0;
+}
+
 .topbar {
   display: flex; /* 子要素をFlexible Boxとして扱う */
   justify-content: center; /*左右中央揃え*/

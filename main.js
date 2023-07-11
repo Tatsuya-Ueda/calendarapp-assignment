@@ -44,7 +44,18 @@ const makeCalendar = (year, monthIndex) => {
   }
   // 今月の日付のセル
   for (let i = 0; i < endDateThisMonth; i++) {
-    cells.push(`<div class="cell">${i + 1}</div>`);
+    let dateOfCell = new Date(year, monthIndex, i + 1);
+    if (holiday_jp.isHoliday(dateOfCell)) {
+      cells.push(`<div class="cell-holiday-red">${i + 1}</div>`);
+    } else if (dateOfCell.getDay() == 0) {
+      // 日曜
+      cells.push(`<div class="cell-holiday-red">${i + 1}</div>`);
+    } else if (dateOfCell.getDay() == 6) {
+      // 土曜
+      cells.push(`<div class="cell-holiday-blue">${i + 1}</div>`);
+    } else {
+      cells.push(`<div class="cell">${i + 1}</div>`);
+    }
   }
   // 合計49セルになるまで，来月の日付で埋める
   for (let i = 0; cells.length < 7 * 7; i++) {
