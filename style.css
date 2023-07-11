@@ -118,6 +118,16 @@ body {
   border-width: 0 1px 1px 0;
 }
 
+.today {
+  display: inline-block;
+  width: 20px;
+  height: 12px;
+  border-radius: 50%;
+  background: skyblue;
+  text-align: center;
+  line-height: 12px;
+}
+
 .topbar {
   display: flex; /* 子要素をFlexible Boxとして扱う */
   justify-content: center; /*左右中央揃え*/

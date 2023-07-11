@@ -26,6 +26,18 @@ const updateCalendar = (date) => {
   }月`;
 };
 
+const isSameDate = (dateA, dateB) => {
+  if (
+    (dateA.getFullYear() == dateB.getFullYear()) &
+    (dateA.getMonth() == dateB.getMonth()) &
+    (dateA.getDate() == dateB.getDate())
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 // 特定の月をカレンダーに表示するためのHTMLの内容(文字列)を作成する
 const makeCalendar = (year, monthIndex) => {
   const startDayOfWeek = new Date(year, monthIndex, 1).getDay();
@@ -44,18 +56,25 @@ const makeCalendar = (year, monthIndex) => {
   }
   // 今月の日付のセル
   for (let i = 0; i < endDateThisMonth; i++) {
-    let dateOfCell = new Date(year, monthIndex, i + 1);
+    const dateOfCell = new Date(year, monthIndex, i + 1);
+    let cellHTML;
     if (holiday_jp.isHoliday(dateOfCell)) {
-      cells.push(`<div class="cell-holiday-red">${i + 1}</div>`);
+      cellHTML = `<div class="cell-holiday-red">`;
     } else if (dateOfCell.getDay() == 0) {
       // 日曜
-      cells.push(`<div class="cell-holiday-red">${i + 1}</div>`);
+      cellHTML = `<div class="cell-holiday-red">`;
     } else if (dateOfCell.getDay() == 6) {
       // 土曜
-      cells.push(`<div class="cell-holiday-blue">${i + 1}</div>`);
+      cellHTML = `<div class="cell-holiday-blue">`;
     } else {
-      cells.push(`<div class="cell">${i + 1}</div>`);
+      cellHTML = `<div class="cell">`;
     }
+    if (isSameDate(dateOfCell, today)) {
+      cellHTML += `<span class="today">${i + 1}</span></div>`;
+    } else {
+      cellHTML += `${i + 1}</div>`;
+    }
+    cells.push(cellHTML);
   }
   // 合計49セルになるまで，来月の日付で埋める
   for (let i = 0; cells.length < 7 * 7; i++) {
