@@ -3,38 +3,31 @@ const today = new Date();
 let dateLookingAt = new Date(today.getFullYear(), today.getMonth(), 1);
 
 window.onload = () => {
-  const x = updateCalendar(
-    dateLookingAt.getFullYear(),
-    dateLookingAt.getMonth()
-  );
-  document.querySelector(".calendar-grid").innerHTML = x;
-  console.log(dateLookingAt);
+  updateCalendar(today);
 };
 
 // 「前月」ボタンを押したときの動作
 const prevMonth = () => {
   dateLookingAt.setMonth(dateLookingAt.getMonth() - 1);
-  const x = updateCalendar(
-    dateLookingAt.getFullYear(),
-    dateLookingAt.getMonth()
-  );
-  document.querySelector(".calendar-grid").innerHTML = x;
-  console.log(dateLookingAt);
+  updateCalendar(dateLookingAt);
 };
 
 // 「翌月」ボタンを押したときの動作
 const nextMonth = () => {
   dateLookingAt.setMonth(dateLookingAt.getMonth() + 1);
-  const x = updateCalendar(
-    dateLookingAt.getFullYear(),
-    dateLookingAt.getMonth()
-  );
-  document.querySelector(".calendar-grid").innerHTML = x;
-  console.log(dateLookingAt);
+  updateCalendar(dateLookingAt);
+};
+
+const updateCalendar = (date) => {
+  const calendarHTML = makeCalendar(date.getFullYear(), date.getMonth());
+  document.querySelector(".calendar-grid").innerHTML = calendarHTML;
+  document.querySelector(".topbar h1").innerHTML = `${date.getFullYear()}年 ${
+    date.getMonth() + 1
+  }月`;
 };
 
 // 特定の月をカレンダーに表示するためのHTMLの内容(文字列)を作成する
-const updateCalendar = (year, monthIndex) => {
+const makeCalendar = (year, monthIndex) => {
   const startDayOfWeek = new Date(year, monthIndex, 1).getDay();
   const endDateThisMonth = new Date(year, monthIndex + 1, 0).getDate();
   const endDateLastMonth = new Date(year, monthIndex, 0).getDate();
