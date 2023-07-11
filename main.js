@@ -1,19 +1,33 @@
 const daysOfWeek = ["日", "月", "火", "水", "木", "金", "土"]; // characters of days of week
 const today = new Date();
+let dateLookingAt = new Date(today.getFullYear(), today.getMonth(), 1);
+
+window.onload = () => {
+  updateCalendar(today);
+};
 
 // 「前月」ボタンを押したときの動作
 const prevMonth = () => {
-  updateCalendar();
+  dateLookingAt.setMonth(dateLookingAt.getMonth() - 1);
+  updateCalendar(dateLookingAt);
 };
 
 // 「翌月」ボタンを押したときの動作
 const nextMonth = () => {
-  x = updateCalendar(2023, 0);
-  document.querySelector(".calendar-grid").innerHTML = x;
+  dateLookingAt.setMonth(dateLookingAt.getMonth() + 1);
+  updateCalendar(dateLookingAt);
+};
+
+const updateCalendar = (date) => {
+  const calendarHTML = makeCalendar(date.getFullYear(), date.getMonth());
+  document.querySelector(".calendar-grid").innerHTML = calendarHTML;
+  document.querySelector(".topbar h1").innerHTML = `${date.getFullYear()}年 ${
+    date.getMonth() + 1
+  }月`;
 };
 
 // 特定の月をカレンダーに表示するためのHTMLの内容(文字列)を作成する
-const updateCalendar = (year, monthIndex) => {
+const makeCalendar = (year, monthIndex) => {
   const startDayOfWeek = new Date(year, monthIndex, 1).getDay();
   const endDateThisMonth = new Date(year, monthIndex + 1, 0).getDate();
   const endDateLastMonth = new Date(year, monthIndex, 0).getDate();
