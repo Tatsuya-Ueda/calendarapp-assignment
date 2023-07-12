@@ -118,6 +118,10 @@ body {
   line-height: 16px;
 }
 
+.holiday-name {
+  color: black;
+}
+
 .topbar {
   display: flex; /* 子要素をFlexible Boxとして扱う */
   justify-content: center; /*左右中央揃え*/

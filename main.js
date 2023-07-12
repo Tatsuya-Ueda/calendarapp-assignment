@@ -74,10 +74,16 @@ const makeCalendar = (year, monthIndex) => {
       cellHTML = `<div class="cell">`;
     }
     if (isSameDate(dateOfCell, today)) {
-      cellHTML += `<span class="today">${i + 1}</span></div>`;
+      // 今日である場合にはtodayクラスを適用してハイライト
+      cellHTML += `<span class="today">${i + 1}</span>`;
     } else {
-      cellHTML += `${i + 1}</div>`;
+      cellHTML += `${i + 1}`;
     }
+    if (holiday_jp.isHoliday(dateOfCell)) {
+      holidayName = holiday_jp.between(dateOfCell, dateOfCell)[0]["name"];
+      cellHTML += `<br><span class=holiday-name>${holidayName}</span>`;
+    }
+    cellHTML += `</div>`;
     cells.push(cellHTML);
   }
   // 合計49セルになるまで，来月の日付で埋める
