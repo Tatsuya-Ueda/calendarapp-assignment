@@ -18,6 +18,7 @@ const nextMonth = () => {
   updateCalendar(dateLookingAt);
 };
 
+// dateが含まれる日付が今月となるように，カレンダー(grid)と「YYYY年MM月」の表示を更新
 const updateCalendar = (date) => {
   const calendarHTML = makeCalendar(date.getFullYear(), date.getMonth());
   document.querySelector(".calendar-grid").innerHTML = calendarHTML;
@@ -56,17 +57,20 @@ const makeCalendar = (year, monthIndex) => {
   }
   // 今月の日付のセル
   for (let i = 0; i < endDateThisMonth; i++) {
+    // ある1つの日付に対して以下の処理を行う
     const dateOfCell = new Date(year, monthIndex, i + 1);
     let cellHTML;
     if (holiday_jp.isHoliday(dateOfCell)) {
+      // 土日以外の休日である場合
       cellHTML = `<div class="cell-holiday-red">`;
     } else if (dateOfCell.getDay() == 0) {
-      // 日曜
+      // 日曜である場合
       cellHTML = `<div class="cell-holiday-red">`;
     } else if (dateOfCell.getDay() == 6) {
-      // 土曜
+      // 土曜である場合
       cellHTML = `<div class="cell-holiday-blue">`;
     } else {
+      // 平日である場合
       cellHTML = `<div class="cell">`;
     }
     if (isSameDate(dateOfCell, today)) {
